@@ -1,8 +1,14 @@
-# React + Vite
+Gazaille Hadrien, Le Corre Sarah, Levilly Timothée, Maillot Tancrède
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Activités réalisées : 
 
-Currently, two official plugins are available:
+Diagramme de classe monolithique : Hadrien, Timothée, Tancrède, Sarah
+Schéma d'achitecture de notre nouvelle application : Hadrien, Timothée, Tancrède, Sarah
+Tableau récapitulatif des bus de communication : Hadrien
+Tableau récapitulatif des frameworks FrontEnd : Sarah
+Springboot : Hadrien, Sarah
+React.js : Timothée, Tancrède
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Elements non réalisées : 
+
+Lien github : https://github.com/timothee-l/ASI2.git
