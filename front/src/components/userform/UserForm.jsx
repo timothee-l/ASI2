@@ -31,8 +31,20 @@ export const UserForm = (props) =>{
 
     function submitOrder(data){
         dispatch(submit_user_action({user:currentUser}));
-       props.redirect();
-       
+        //props.redirect();
+        fetch('/sendmsg/user', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: (JSON.stringify({user:currentUser})),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("response received");
+              navigate('/display');
+            })
+            .catch((error) => {
+              console.log("Error submitting new user: " + error);
+            });
     }
     
     return (

@@ -2,6 +2,7 @@ package msgreceiver.comm.controller;
 
 import javax.jms.Message;
 
+import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
@@ -33,6 +34,13 @@ public class BusListener {
     public void receiveMessageB(Card card, Message message) {
 
         System.out.println("[BUSLISTENER] [CHANNEL B] RECEIVED Poney MSG=["+card+"]");
+
+    }
+
+    @JmsListener(destination = "user", containerFactory = "connectionFactory")
+    public void receiveUser(User user) {
+
+        System.out.println("[BUSLISTENER] [CHANNEL USER] RECEIVED User=["+user+"]");
 
     }
 }

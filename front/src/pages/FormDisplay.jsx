@@ -7,21 +7,14 @@ import { useNavigate } from 'react-router-dom';
 
 
 export const FormDisplay =(props) =>{
-const [currentUser,setCurrentUser]= useState({
-                                  id:12,
-                                  surname:"John",
-                                  lastname:"Doe",
-                                  login:"jDoe",
-                                  pwd:"jdoepwd",
-                                  img:'https://www.nicepng.com/png/full/982-9820051_heart-2352306885-deadpool-png.png',
-                                  money:1000,
-                                });
+const [currentUser,setCurrentUser]= useState({});
 
 const navigate = useNavigate();
 
 function callbackErr(data){
   console.log(data);
 };
+
 
 function handleChange(data){
   console.log(data);

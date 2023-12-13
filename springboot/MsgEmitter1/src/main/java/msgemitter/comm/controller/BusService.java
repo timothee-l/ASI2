@@ -1,5 +1,6 @@
 package msgemitter.comm.controller;
 
+import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,11 @@ public class BusService {
     public void sendMsg(Card card, String busName) {
         System.out.println("[BUSSERVICE] SEND String MSG=["+card+"] to Bus=["+card+"]");
         jmsTemplate.convertAndSend(busName,card);
+    }
+
+    public void sendUser(User user) {
+        System.out.println("[BUSSERVICE] SEND String USER=["+user+"]");
+        jmsTemplate.convertAndSend("user", user);
     }
 }
 
