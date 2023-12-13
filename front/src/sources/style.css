@@ -38,3 +38,26 @@ body {
   .card-body {
     padding: 10px;
   }
+
+
+  .Stat-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .HP {
+    font-family:'Courier New', Courier, monospace;
+  }
+  .Energy {
+    font-family:'Courier New', Courier, monospace;
+  }
+  .Attack {
+    font-family:'Courier New', Courier, monospace;
+  }
+  .Defense {
+    font-family:'Courier New', Courier, monospace;
+  }
