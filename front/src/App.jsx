@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Grid, Segment, Menu } from 'semantic-ui-react';
+import { useEffect } from 'react';
 import { 
   BrowserRouter,
   Routes,
   Route,
   NavLink
 } from "react-router-dom";
+import io from 'socket.io-client';
 
 import { Home } from './pages/Home';
 import { Display } from './pages/Display';
@@ -15,19 +17,36 @@ import { Vente } from './pages/Magasin/Vente';
 import { SelecDeck } from './pages/Jeu/SelecDeck';
 import { Jeu } from './pages/Jeu/Jeu';
 
+
+
 //Create function component
 export const App =(props) =>{
   const [currentUser,setCurrentUser]= useState({
-                                      id:12,
+                                      id:Math.floor(Math.random() * 900) + 100,
                                       surname:"John",
                                       lastname:"Doe",
                                       login:"jDoe",
                                       pwd:"jdoepwd",
                                       img:'https://www.nicepng.com/png/full/982-9820051_heart-2352306885-deadpool-png.png',
                                       money:1000,
-                                    });
+  });
 
+  useEffect(() => {
+    const socket = io({path: "/socket-service/", transports: ["websocket"]});
 
+    // Register the client with the server
+    socket.emit('register-client', currentUser.id);
+
+    // Listen for the 'post-data' event
+    socket.on('post-data', (data) => {
+      console.log(`Received data from server for client ${clientId}:`, data);
+    });
+
+    // Clean up the WebSocket connection when the component unmounts
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
    
   return (
     <>
