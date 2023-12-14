@@ -12,6 +12,8 @@ import { Display } from './pages/Display';
 import { FormDisplay } from './pages/FormDisplay';
 import { Achat } from './pages/Magasin/Achat';
 import { Vente } from './pages/Magasin/Vente';
+import { SelecDeck } from './pages/Jeu/SelecDeck';
+import { Jeu } from './pages/Jeu/Jeu';
 
 //Create function component
 export const App =(props) =>{
@@ -69,6 +71,8 @@ export const App =(props) =>{
         <Route path='/vente' element={<Vente/>} />
         <Route path='/display' element={<Display/>} />
         <Route path='/form' element={<FormDisplay/>} />
+        <Route path='/deck' element={<SelecDeck/>} />
+        <Route path='/room' element={<Jeu/>} />
         <Route path='/' element={<Home/>} />
         </Routes>
       </div>

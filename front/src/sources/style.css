@@ -61,3 +61,32 @@ body {
   .Defense {
     font-family:'Courier New', Courier, monospace;
   }
+
+  .PlayButton {
+    background-color: blanchedalmond;
+  }
+
+  .game-board {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .player-one-cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+  }
+  .player-two-cards {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content:right;
+  }
+  .player-one-card-slot, .player-two-card-slot, .card-slot{
+    width: 200px;
+    height: 350px;
+    margin: 10px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 150px;
+  }

@@ -1,9 +1,12 @@
 import React from 'react';
 import {CardInline} from '../components/CardInline';
 import {CardDetail} from '../components/CardDetail';
+import {CardInListe} from '../components/CardInListe';
+import {CardInGame} from '../components/CardInGame';
 import {useDispatch} from 'react-redux';
 import { update_selected_card } from '../../../slices/cardSlice';
 import '../../../sources/style.css';
+import { Checkbox } from 'semantic-ui-react';
 
 export const Card = (props) => {
     if(props.card == undefined) {
@@ -20,14 +23,34 @@ export const Card = (props) => {
         dispatch(update_selected_card(card));
     }
 
+    function handleOnCheck(){
+        console.log('added carte to list')
+    }
+
     if(props.inline){
         return(
-            <div class="d-flex">
+            <div className="d-flex">
                 <CardInline card = {props.card}/>
-                <button class="btn btn-primary" onClick={()=>{handleOnSelectedCard(props.card)}}>Details</button>
+                <button className="btn btn-primary" onClick={()=>{handleOnSelectedCard(props.card)}}>Details</button>
             </div>
         )
-    }else{
+    }
+    if(props.ingame){
+        return(
+            <div className='d-flex'>
+                <CardInGame card = {props.card} />
+            </div>
+        )
+    }
+    if(props.inliste){
+        return(
+            <div className='d-flex'>
+                <CardInListe card = {props.card} />
+                <Checkbox label='prendre carte ?' onChange={handleOnCheck}/>
+            </div>
+        )
+    }
+    else{
         return(
             <div>
                 <CardDetail card = {props.card}/>
