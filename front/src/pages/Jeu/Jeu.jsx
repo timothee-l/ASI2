@@ -13,7 +13,7 @@ export const Jeu =(props) =>{
             <div className="game-board">
                 <div className='player-one-cards'>
                     <div>
-                        <Liste className="player-one-card-slot" cards={P1Deck.cards} ingame/>
+                        <Liste className="player-one-card-slot" cards={market.cards} ingame/>
                     </div>
                 </div>
 

@@ -5,7 +5,6 @@ export const CardInListe = (props) => {
     return(
         <div>            
             <p>Nom: {props.card.name}</p>
-            <p>Valeur: {props.card.value}</p>
             <img style={{ height: 50, width: 50, objectFit: 'contain' }} src={props.card.src} alt="Card Image" />
             <div className="Stat-box">
                 <div className="HP">HP: {props.card.hp}</div>

@@ -46,7 +46,7 @@ export const Card = (props) => {
         return(
             <div className='d-flex'>
                 <CardInListe card = {props.card} />
-                <Checkbox label='prendre carte ?' onChange={handleOnCheck}/>
+                <Checkbox className='deck-checkbox' label='prendre carte ?' onChange={handleOnCheck}/>
             </div>
         )
     }

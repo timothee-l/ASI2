@@ -16,8 +16,10 @@ export const SelecDeck =(props) =>{
     
     <Container>
       <h3>Selectionne 5 cartes</h3>
-      <DeckListe cards={P1Deck.cards} inliste />
       <button className="PlayButton" onClick={handleClick}> Find Game</button> {/* on peut utiliser la balise disabled pour s'assurer que 5 cartes sont cocher pour cliquer sur jouer*/} 
+      <div className='deck-show'>
+        <DeckListe cards={P1Deck.cards} inliste />
+      </div>
     </Container>
   );
 }

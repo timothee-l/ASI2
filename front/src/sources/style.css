@@ -30,6 +30,16 @@ body {
     padding: 10px;
     cursor: pointer;
   }
+
+  .list-group-game {
+    cursor: none;
+  }
+  
+  .list-group-deck {
+    cursor: none;
+    display: grid;
+    flex-direction: row;
+  }
   
   .card {
     margin-bottom: 20px;
@@ -49,6 +59,9 @@ body {
     border-radius: 5px;
   }
 
+  .CardName {
+    font-family: 'Times New Roman', Times, serif;
+  }
   .HP {
     font-family:'Courier New', Courier, monospace;
   }
@@ -62,8 +75,18 @@ body {
     font-family:'Courier New', Courier, monospace;
   }
 
+  .InfoBox {
+    display: flex;
+    flex-direction: row;
+  }
+
   .PlayButton {
     background-color: blanchedalmond;
+    width: 150px;
+    height: 50px;
+  }
+  .PlayButton:hover {
+    background-color: rgba(235, 215, 185, 1);
   }
 
   .game-board {
@@ -73,20 +96,40 @@ body {
 
   .player-one-cards {
     display: flex;
-    flex-direction: column;
-    justify-content: left;
+    flex-flow: row;
+    width: 100%;
   }
   .player-two-cards {
     display: flex;
-    flex-direction: column-reverse;
-    justify-content:right;
+    flex-flow: row;
+    width: 100%;
   }
   .player-one-card-slot, .player-two-card-slot, .card-slot{
-    width: 200px;
-    height: 350px;
+    padding-top: 10px;
+    padding-left: 10px;
+    width: 400px;
+    height: 215px;
     margin: 10px;
-    background-color: #eee;
-    border: 1px solid #ccc;
-    text-align: center;
-    line-height: 150px;
+    background-color: #b3b3b3;
+    border: 1px solid #000000;
+  }
+
+
+  .deck-show {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .deck-card {
+    width: auto;
+    height: auto;
+    padding-left: 10px;
+    margin: 10px;
+    background-color: #b3b3b3;
+    border: 1px solid #000000;
+  }
+
+  .deck-checkbox {
+    padding-top: 10px;
+    padding-right: 10px;
   }
