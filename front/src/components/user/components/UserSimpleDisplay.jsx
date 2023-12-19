@@ -11,13 +11,12 @@ import { Card, Image, Icon } from 'semantic-ui-react';
                     <span className='date'>login: {props.login}</span>
                 </Card.Meta>
                 <Card.Description>
-                    User In DataBase
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
                     <a>
                         <Icon name='money bill alternate outline' />
-                            {props.money} $
+                            ${props.money}
                     </a>
             </Card.Content>
         </Card>

@@ -1,80 +1,88 @@
 import React, { useState } from 'react';
-import { Form, Header,Button } from 'semantic-ui-react'
 import { useDispatch, useSelector } from "react-redux";
-import {update_user_action,submit_user_action } from '../../slices/userSlice';
 
 export const UserForm = (props) =>{
-   const [currentUser,setCurrentUser]= useState({
-                                            id:"",
-                                            surname:"",
-                                            lastname:"",
-                                            img:"",
-                                            login:"",
-                                            pwd:"",
-                                            money:0,
-
-                                        });
-    const dispatch = useDispatch();
-
-
-    function processInput(event, { valueData }){
-        const target = event.currentTarget;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        console.log(event.target.value);
-        let currentVal=currentUser;
-        setCurrentUser({...currentUser, [name]: value});
-        currentVal[name]= value;
-        //props.handleChange(currentVal);
-        dispatch(update_user_action({user:currentVal}));
+    const [surname, setSurname] = useState('');
+    const [last_name, setLastName] = useState('');
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
+    const [money, setMoney] = useState('');
+    const [image, setImage] = useState('');
+    const [registrationResult, setRegistrationResult] = useState(null);
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+  
+      // Prepare data to send to the server
+      const formData = {
+        surname,
+        last_name,
+        login,
+        password,
+        money: parseInt(money, 10),
+        image,
+      };
+  
+      try {
+        // Send a POST request to the server
+        const response = await fetch('/db/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+  
+        // Parse the server response
+        const result = await response.json();
+  
+        // Update the state with the registration result
+        setRegistrationResult(result.success ? 'Registration successful' : 'Registration failed');
+      } catch (error) {
+        console.error('Error during registration:', error);
+        setRegistrationResult('An error occurred during registration');
+      }
     };
-
-    function submitOrder(data){
-        dispatch(submit_user_action({user:currentUser}));
-        //props.redirect();
-        fetch('/sendmsg/user', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: (JSON.stringify({user:currentUser})),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log("response received");
-              navigate('/display');
-            })
-            .catch((error) => {
-              console.log("Error submitting new user: " + error);
-            });
-    }
-    
+  
     return (
-        <Form>
-            <Header as='h4' dividing>
-                User Registration
-            </Header>
-            <Form.Field>
-                <Form.Input fluid type="number" label='Id' placeholder='Id' name="id" onChange={processInput} value={currentUser.id} />
-            </Form.Field>
-            <Form.Group widths='equal'>
-                <Form.Input fluid label='Surname' placeholder='Surname' name="surname" onChange={processInput} value={currentUser.surname} />
-                <Form.Input fluid label='Last Name' placeholder='Last Name' name="lastname"  onChange={processInput} value={currentUser.lastname}/>
-            </Form.Group>
-
-            <Form.Field>
-                <Form.Input label="Login" placeholder="Login" onChange={processInput}  name="login" value={currentUser.login}/>
-            </Form.Field>
-            <Form.Field>
-                <Form.Input type="password" label="Pwd" placeholder="" onChange={processInput}  name="pwd" value={currentUser.pwd}/>
-            </Form.Field>
-            <Form.Field>
-                <Form.Input label="Image" placeholder="Image" onChange={processInput}  name="img" value={currentUser.img}/>
-            </Form.Field>
-            <Form.Field>
-                <Form.Input label="Money" type="number" placeholder="" onChange={processInput}  name="money" value={currentUser.money}/>
-            </Form.Field>
-            <Button type='submit' onClick={submitOrder}>Submit</Button>
-        </Form>
-
+      <div>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Surname:
+            <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} />
+          </label>
+          <br />
+          <label>
+            Last Name:
+            <input type="text" value={last_name} onChange={(e) => setLastName(e.target.value)} />
+          </label>
+          <br />
+          <label>
+            Login:
+            <input type="text" value={login} onChange={(e) => setLogin(e.target.value)} />
+          </label>
+          <br />
+          <label>
+            Password:
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </label>
+          <br />
+          <label>
+            Money:
+            <input type="number" value={money} onChange={(e) => setMoney(e.target.value)} />
+          </label>
+          <br />
+          <label>
+            Image URL:
+            <input type="text" value={image} onChange={(e) => setImage(e.target.value)} />
+          </label>
+          <br />
+          <button type="submit">Register</button>
+        </form>
+  
+        {registrationResult && <p>{registrationResult}</p>}
+      </div>
     );
-    
-    }
+  };
+  
+  export default UserForm;

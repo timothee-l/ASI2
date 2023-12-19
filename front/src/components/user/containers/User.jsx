@@ -18,10 +18,10 @@ const SHORT_LABEL='SHORT';
         case SHORT_LABEL:
             display = (                
                 <UserShortDisplay 
-                    surname = {current_user.surname}
-                    lastname = {current_user.lastname}
-                    img = {current_user.img}
-                    money = {current_user.money}> 
+                    surname = {props.surname}
+                    lastname = {props.lastname}
+                    img = {props.img}
+                    money = {props.money}> 
                 </UserShortDisplay>
             );
 
@@ -29,13 +29,13 @@ const SHORT_LABEL='SHORT';
         case FULL_LABEL:
             display=(                
                 <UserSimpleDisplay 
-                    id = {current_user.id}
-                    surname = {current_user.surname}
-                    lastname = {current_user.lastname}
-                    login = {current_user.login}
-                    pwd = {current_user.pwd}
-                    money = {current_user.money}
-                    img = {current_user.img}> 
+                    id = {props.id}
+                    surname = {props.surname}
+                    lastname = {props.lastname}
+                    login = {props.login}
+                    pwd = {props.pwd}
+                    money = {props.money}
+                    img = {props.img}> 
                 </UserSimpleDisplay>
             );
             break;
