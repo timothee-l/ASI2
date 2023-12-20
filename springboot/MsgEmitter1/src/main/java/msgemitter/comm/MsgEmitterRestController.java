@@ -23,15 +23,21 @@ public class MsgEmitterRestController {
         return true;
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/sendmsg")
+    public boolean sendInform(@RequestBody String msg) {
+        busService.sendMsg(msg);
+        return true;
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/sendmsg/user")
     public boolean sendInform(@RequestBody User user) {
         busService.sendUser(user);
         return true;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sendmsg")
-    public boolean sendInform(@RequestBody Card msg) {
-        busService.sendMsg(msg);
+    @RequestMapping(method = RequestMethod.POST, value = "/sendmsg/card")
+    public boolean sendInform(@RequestBody Card card) {
+        busService.sendMsg(card);
         return true;
     }
 

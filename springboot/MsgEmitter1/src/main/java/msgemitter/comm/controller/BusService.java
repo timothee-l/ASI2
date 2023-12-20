@@ -23,6 +23,11 @@ public class BusService {
         jmsTemplate.convertAndSend(busName,card);
     }
 
+    public void sendMsg(String msg) {
+        System.out.println("[BUSSERVICE] SEND String MSG=["+msg+"] to Bus=["+msg+"]");
+        jmsTemplate.convertAndSend("RESULT_BUS_MNG",msg);
+    }
+
     public void sendUser(User user) {
         System.out.println("[BUSSERVICE] SEND String USER=["+user+"]");
         jmsTemplate.convertAndSend("user", user);
