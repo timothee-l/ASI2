@@ -28,24 +28,24 @@ mvn -f ./springboot/CommonModel1/pom.xml clean package
 echo "Starting MsgEmitter1 Springboot Service"
 mvn -f ./springboot/MsgEmitter1 spring-boot:run &
 PID=$!
-echo $pid > $PID_FILE
+echo $pid >> $PID_FILE
 
 echo "Starting MsgReceiver1 Springboot Service"
 mvn -f ./springboot/MsgReceiver1 spring-boot:run &
 PID=$!
-echo $pid > $PID_FILE
+echo $pid >> $PID_FILE
 
 echo "Starting Matchmaking Node Service"
 npm -C ./node/matchmaking install
 node ./node/matchmaking/app.js
 PID=$!
-echo $pid > $PID_FILE
+echo $pid >> $PID_FILE
 
 echo "Starting Notification Node Service"
 npm -C ./node/notification install
 node ./node/notification/app.js
 PID=$!
-echo $pid > $PID_FILE
+echo $pid >> $PID_FILE
 
 echo "Starting Database Node Service"
 cd ./node/database
@@ -54,13 +54,13 @@ node createTables.js
 node app.js
 PID=$!
 cd ../..
-echo $pid > $PID_FILE
+echo $pid >> $PID_FILE
 
 echo "Starting Vite Server"
 cd front
 npm install
 npm run dev -- --host
 PID=$!
-echo $pid > $PID_FILE
+echo $pid >> $PID_FILE
 
 echo "Done."
