@@ -60,14 +60,12 @@ app.post('/auth/logout', (req, res) => {
 
 app.post('/db/register', (req, res) => {
   const { surname, last_name, login, password, image, money } = req.body;
-  console.log("t'es la frerot?")
   const stmt = db.prepare('INSERT INTO users (surname, last_name, login, password, image, money) VALUES (?, ?, ?, ?, ?, ?)');
   stmt.run(surname, last_name, login, password, image, money, function (err) {
     if (err) {
       console.log(err);
       return res.status(500).json({ error: err.message });
     }
-    console.log("ok");
 
     res.json({ userId: this.lastID });
   });

@@ -7,7 +7,7 @@ export const DeckListe = (props) => {
     let display = props.cards.map(
         (card) => (
             <li key={card.name} className="deck-card">
-                <Card card={card} inliste/>
+                <Card card={card} handleOnCheck={props.handleOnCheck} inliste/>
             </li>
         )
     )
