@@ -1,60 +1,74 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import {set_user} from '../slices/userSlice.js';
 
 export const UserForm = (props) =>{
-    const [surname, setSurname] = useState('');
-    const [last_name, setLastName] = useState('');
+    const [surName, setSurName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('');
-    const [money, setMoney] = useState('');
-    const [image, setImage] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [account, setAccount] = useState('');
+    const [img, setImg] = useState('');
     const [registrationResult, setRegistrationResult] = useState(null);
+    const dispatch = useDispatch();
+    let current_user = useSelector(state => state.userReducer.user);
+    console.log("user:"+JSON.stringify(current_user));  
   
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-  
+    const handleSubmit = async () => {
       // Prepare data to send to the server
       const formData = {
-        surname,
-        last_name,
+        surName,
+        lastName,
         login,
-        password,
-        money: parseInt(money, 10),
-        image,
+        pwd,
+        account: parseInt(account, 10),
+        img,
       };
-  
+    
       try {
         // Send a POST request to the server
-        const response = await fetch('/db/register', {
+        const response = await fetch('/mono/user', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(formData),
         });
-  
+    
         // Parse the server response
         const result = await response.json();
-  
-        // Update the state with the registration result
-        setRegistrationResult(result.success ? 'Registration successful' : 'Registration failed');
+    
+        console.log(result);
+    
+        // Check for success and handle accordingly
+        if (result.success) {
+          // Registration successful, user object is available
+          dispatch(set_user(result));
+          setRegistrationResult('Registration successful');
+          console.log('User Object:', result.user);
+        } else {
+          // Registration failed, handle the error
+          setRegistrationResult('Registration failed');
+        }
       } catch (error) {
+        // Handle network or other errors
         console.error('Error during registration:', error);
         setRegistrationResult('An error occurred during registration');
       }
     };
+    
   
     return (
       <div>
         <form onSubmit={handleSubmit}>
           <label>
             Surname:
-            <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} />
+            <input type="text" value={surName} onChange={(e) => setSurName(e.target.value)} />
           </label>
           <br />
           <label>
             Last Name:
-            <input type="text" value={last_name} onChange={(e) => setLastName(e.target.value)} />
+            <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
           </label>
           <br />
           <label>
@@ -64,17 +78,17 @@ export const UserForm = (props) =>{
           <br />
           <label>
             Password:
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="pwd" value={pwd} onChange={(e) => setPwd(e.target.value)} />
           </label>
           <br />
           <label>
             Money:
-            <input type="number" value={money} onChange={(e) => setMoney(e.target.value)} />
+            <input type="number" value={account} onChange={(e) => setAccount(e.target.value)} />
           </label>
           <br />
           <label>
-            Image URL:
-            <input type="text" value={image} onChange={(e) => setImage(e.target.value)} />
+            img URL:
+            <input type="text" value={img} onChange={(e) => setImg(e.target.value)} />
           </label>
           <br />
           <button type="submit">Register</button>
