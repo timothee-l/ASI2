@@ -54,7 +54,6 @@ export const Card = (props) => {
         return(
             <div>
                 <CardDetail card = {props.card}/>
-                <button>Placeholder Tx</button>
             </div>
         )
     }

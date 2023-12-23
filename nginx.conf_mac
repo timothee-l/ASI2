@@ -37,8 +37,9 @@ http {
     location /play/ {
         proxy_pass http://docker.for.mac.host.internal:5101;
     }
-    location /db/ {
-        proxy_pass http://docker.for.mac.host.internal:5103;
+    location /mono/ {
+        rewrite ^/mono/(.*)$ /$1 break;
+        proxy_pass http://docker.for.mac.host.internal:5105;
     }
 
 

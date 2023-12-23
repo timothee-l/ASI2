@@ -14,61 +14,37 @@ export const Display =(props) =>{
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    // Check if there is a valid cookie on page load
-    fetch('/auth/user', { credentials: 'include' })
-      .then((response) => response.json())
-      .then(
-        (data) => {setUserId(data.userId), fetchUserDetails(data.userId), console.log("good cookie")},
-        (error) => {
-          console.error(error);
-          setUserId(null);
-          dispatch(set_user({}));
-          console.log("bad cookie");
-        }
-      );
-  }, []);
 
   const handleLogin = () => {
-    fetch('/auth/login', {
+    fetch('/mono/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
       body: JSON.stringify({ username, password }),
     })
       .then((response) => {
         console.log('Response status:', response.status);
+        if (!response.ok) {
+          throw new Error('Connexion échouée');
+        }
         return response.json();
       })
       .then((data) => {
-        console.log('Login success', data);
-        setUserId(data.userId);
-        fetchUserDetails(data.userId);
+        fetchUserDetails(data);
       })
       .catch((error) => {
-        console.error(error);
-        setErrorMsg('Connexion échouée');
+        setErrorMsg(error.message);
       });
   };
   
+  
   const handleLogout = () => {
-    fetch('/auth/logout', {
-      method: 'POST',
-      credentials: 'include',
-    })
-      .then(() => {
-        setUserId(null)
-        dispatch(set_user({}));
-      })
-      .catch((error) => console.error(error));
+    dispatch(set_user({}));
   };
 
   const fetchUserDetails = (id) => {
-    fetch(`/db/user/${id}`, {
+    fetch(`/mono/user/${id}`, {
       method: 'GET',
     })
       .then((response) => {
@@ -85,9 +61,7 @@ export const Display =(props) =>{
       });
   };
   
-  
   console.log("Current User:" + JSON.stringify(current_user));
-  console.log("Current user id: " + userId);
 
   function notNullOrEmpty(obj) {
     if (obj === null){
@@ -101,11 +75,6 @@ export const Display =(props) =>{
     }
     return true;
   }
-  
-  if(notNullOrEmpty(current_user)){
-    fetchUserDetails();
-  }
-
 
   return (
   
@@ -118,11 +87,11 @@ export const Display =(props) =>{
           <Container>
             <User 
               id={current_user.id}
-              surname={current_user.surname}
-              lastname={current_user.lastname}
+              surname={current_user.surName}
+              lastname={current_user.lastName}
               login={current_user.login}
               pwd={current_user.pwd}
-              money={current_user.money}
+              money={current_user.account}
               img={current_user.img}
               display_type='FULL'/>      
           </Container>
