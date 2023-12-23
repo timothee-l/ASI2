@@ -30,48 +30,20 @@ function handleChange(data){
 };
 
 function redirectHandler(data){
-  console.log("user to submit"+data);
 
   navigate('/display');
 };
 
 return (
   <Container>
-    <Grid divided='vertically'>
-      <Grid.Row columns={3}>
-        <Grid.Column>
-          <Segment>
-            <UserForm 
-                  handleChange={handleChange}
-                  redirect={redirectHandler}>
-            </UserForm>
-          </Segment>
-        </Grid.Column>
-        <Grid.Column>
-          <User 
-                 id={currentUser.id}
-                  surname={currentUser.surname}
-                  lastname={currentUser.lastname}
-                  login={currentUser.login}
-                  pwd={currentUser.pwd}
-                  money={currentUser.money}
-                  img={currentUser.img}
-                  display_type='FULL'>
-          </User>
-        </Grid.Column>
-        <Grid.Column>
-          <User id={currentUser.id}
-                  surname={currentUser.surname}
-                  lastname={currentUser.lastname}
-                  login={currentUser.login}
-                  pwd={currentUser.pwd}
-                  money={currentUser.money}
-                  img={currentUser.img}
-                  display_type='SHORT'>
-          </User>
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
+  
+    <Segment>
+      <UserForm 
+            handleChange={handleChange}
+            redirect={redirectHandler}>
+      </UserForm>
+    </Segment>
+        
   </Container>
 );
 }

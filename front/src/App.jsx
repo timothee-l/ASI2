@@ -17,6 +17,7 @@ import { Vente } from './pages/Magasin/Vente';
 import { SelecDeck } from './pages/Jeu/SelecDeck';
 import { Jeu } from './pages/Jeu/Jeu';
 import { useSelector } from 'react-redux';
+import { Chat } from './pages/Chat';
 
 
 //Create function component
@@ -64,6 +65,12 @@ export const App =(props) =>{
           name='menuAchat'
           
         >
+        <NavLink to="/chat">Chat</NavLink>
+        </Menu.Item> 
+        <Menu.Item
+          name='menuVente'
+          
+        >
         <NavLink to="/achat" >Achat</NavLink>
         </Menu.Item> 
         <Menu.Item
@@ -84,6 +91,7 @@ export const App =(props) =>{
         <Route path='/form' element={<FormDisplay/>} />
         <Route path='/deck' element={<SelecDeck/>} />
         <Route path='/room' element={<Jeu/>} />
+        <Route path='/chat' element={<Chat/>} />
         <Route path='/' element={<Home/>} />
         </Routes>
       </div>
