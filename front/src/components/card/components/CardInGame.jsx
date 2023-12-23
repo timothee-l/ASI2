@@ -11,7 +11,7 @@ export const CardInGame = (props) => {
         CardInGame === id 
         ? setCardInGame(null)
         : setCardInGame(id)
-        console.log(props.card.id)
+        console.log(props.card) // TODO send the card to the backend
     };
     
     return(
