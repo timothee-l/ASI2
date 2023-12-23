@@ -12,7 +12,7 @@ Gazaille Hadrien, Le Corre Sarah, Levilly Timothée, Maillot Tancrède
 ## Setup
 - Lancer le reverse proxy: 
   `cp ./nginx.conf /var/tmp
-docker run -d --rm --name my-custom-asi-nginx-container -p 5100:5100 -v /var/tmp/nginx.conf:/etc/nginx/nginx.conf:ro nginx`
+docker run -d --rm --name my-custom-asi-nginx-container --network host -v /var/tmp/nginx.conf:/etc/nginx/nginx.conf:ro nginx`
 - Lancer le message broker
   `docker run -d -it -p 61616:61616 -p 61613:61613 -p 8161:8161 -e ACTIVEMQ_DISALLOW_WEBCONSOLE=false -e ACTIVEMQ_USERNAME=myuser -e ACTIVEMQ_PASSWORD=mypwd -e ACTIVEMQ_WEBADMIN_USERNAME=myuserweb -e ACTIVEMQ_WEBADMIN_PASSWORD=mypwd symptoma/activemq:latest
 `

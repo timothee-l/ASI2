@@ -4,7 +4,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.atelier1.springboot</groupId>
-	<artifactId>MsgReceiver</artifactId>
+	<artifactId>MsgReceiver1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
@@ -22,12 +22,14 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+     	<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<dependencies>
         <dependency>
                 <groupId>com.atelier1.springboot</groupId>
-                <artifactId>CommonModel</artifactId>
+                <artifactId>CommonModel1</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
    		</dependency>
 

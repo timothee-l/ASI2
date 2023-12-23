@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 const FULL_LABEL='FULL';
 const SHORT_LABEL='SHORT';
+export const current_user2='carah le sorre';
 
-
- export const User=(props)=> {
+export const User=(props)=> {
     let current_user = useSelector(state => state.userReducer.user);
-
+ 
 
     let display="";
     switch(props.display_type){

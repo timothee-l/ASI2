@@ -19,21 +19,21 @@ public class BusListener {
     @JmsListener(destination = "RESULT_BUS_MNG", containerFactory = "connectionFactory")
     public void receiveMessageResult(Card card, Message message) {
 
-            System.out.println("[BUSLISTENER] [CHANNEL RESULT_BUS_MNG] RECEIVED Poney MSG=["+card+"]");
+            System.out.println("[BUSLISTENER] [CHANNEL RESULT_BUS_MNG] RECEIVED Message MSG=["+card+"]");
 
     }
 
     @JmsListener(destination = "A", containerFactory = "connectionFactory")
     public void receiveMessageA(Card card, Message message) {
 
-        System.out.println("[BUSLISTENER] [CHANNEL A] RECEIVED Poney MSG=["+card+"]");
+        System.out.println("[BUSLISTENER] [CHANNEL A] RECEIVED Card MSG=["+card+"]");
 
     }
 
     @JmsListener(destination = "B", containerFactory = "connectionFactory")
     public void receiveMessageB(Card card, Message message) {
 
-        System.out.println("[BUSLISTENER] [CHANNEL B] RECEIVED Poney MSG=["+card+"]");
+        System.out.println("[BUSLISTENER] [CHANNEL B] RECEIVED Card MSG=["+card+"]");
 
     }
 
