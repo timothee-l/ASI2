@@ -7,9 +7,14 @@ import '../../sources/style.css';
 
 export const Jeu =(props) =>{
 
+    function EndTurn(){
+        console.log('ended turn')
+    }
+
     return (
         <Container>
             <h3>Zone de Jeu</h3>
+            <button onClick={EndTurn}> End Turn </button>
             <div className="game-board">
                 <div className='player-one-cards'>
                     <div>

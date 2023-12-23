@@ -1,24 +1,37 @@
 import React from 'react';
+import { useState } from 'react';
 import '../../../sources/style.css';
-import { Container } from 'semantic-ui-react';
+import { Card, Container } from 'semantic-ui-react';
 
 export const CardInGame = (props) => {
+
+    const [CardInGame, setCardInGame] = useState(null);
+
+    const handleActivate = (id) => {
+        CardInGame === id 
+        ? setCardInGame(null)
+        : setCardInGame(id)
+        console.log(props.card.id)
+    };
+    
     return(
-        <div className='card-slot'>
-            <img style={{ height: 150, width: 150, objectFit: 'contain' }} src={props.card.src} alt="Card Image" />
-            <table className='InfoBox'>
-                <tr>
-                    <td className='CardName'>{props.card.name}</td>
-                </tr>  
-                <tr>
-                    <td className="HP">HP: {props.card.hp}</td>
-                    <td className="Energy">Energy: {props.card.energy}</td>
-                </tr>
-                <tr>
-                    <td className='Attack'>Attack: {props.card.attack}</td>
-                    <td className='Defense'>Defense: {props.card.defense}</td>
-                </tr>
-            </table>    
+        <div className={`card-slot`}
+            style={{
+                backgroundColor: CardInGame === props.card.id ? "green" : null
+            }}
+        onClick={() => handleActivate(props.card.id)}>
+            <div className='card-ingame'>
+                <img style={{ height: 150, width: 150, objectFit: 'contain' }} src={props.card.src} alt="Card Image" />
+                <div className='InfoBox'>
+                    <div>
+                    <div className='CardName'>{props.card.name}</div>
+                        <div className="HP">HP: {props.card.hp}</div>
+                        <div className="Energy">Energy: {props.card.energy}</div>
+                        <div className='Attack'>Attack: {props.card.attack}</div>
+                        <div className='Defense'>Defense: {props.card.defense}</div>
+                    </div>
+                </div>   
+            </div> 
         </div>
-    )
-}
+    );
+};
