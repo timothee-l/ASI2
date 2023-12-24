@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import {set_user} from '../slices/userSlice.js';
+import {set_user} from '../../slices/userSlice.js';
 
 export const UserForm = (props) =>{
     const [surName, setSurName] = useState('');

@@ -23,8 +23,12 @@ export const Card = (props) => {
         dispatch(update_selected_card(card));
     }
 
-    function handleOnCheck(){
-        console.log('added carte to list')
+    
+    function handleOnCheck(e){
+        console.log(e.target)
+        const value = e.target.checked;
+        console.log(value);
+        props.handleOnCheck(value);
     }
 
     if(props.inline){
@@ -38,7 +42,7 @@ export const Card = (props) => {
     if(props.ingame){
         return(
             <div className='d-flex'>
-                <CardInGame card = {props.card} />
+                <CardInGame card = {props.card}/>
             </div>
         )
     }
@@ -46,7 +50,7 @@ export const Card = (props) => {
         return(
             <div className='d-flex'>
                 <CardInListe card = {props.card} />
-                <Checkbox className='deck-checkbox' label='prendre carte ?' onChange={handleOnCheck}/>
+                <input type="checkbox" className='deck-checkbox' onClick={event => handleOnCheck(event)}/>
             </div>
         )
     }
