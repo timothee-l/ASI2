@@ -24,16 +24,6 @@ public class CardModelService {
 
 	@PostConstruct
     public void init() {
-        // Initialize CardModel tables
-        CardModel card1 = new CardModel("jaune salami", "blabla", "", "", 10, 20,
-			20, 30, "https://avatars.githubusercontent.com/u/8275121?v=4", "", 100);
-		cardRepository.save(card1);
-		// CardModel card2 = CardModel(String name, String description, String family, String affinity, float energy, float hp,
-		// 	float defence, float attack,String imgUrl,String smallImg,float price)
-        // CardModel card3 = CardModel(String name, String description, String family, String affinity, float energy, float hp,
-		// 	float defence, float attack,String imgUrl,String smallImg,float price)
-		// CardModel card4 = CardModel(String name, String description, String family, String affinity, float energy, float hp,
-		// 	float defence, float attack,String imgUrl,String smallImg,float price)			
     }
 
 	public CardModelService(CardModelRepository cardRepository,CardReferenceService cardRefService) {

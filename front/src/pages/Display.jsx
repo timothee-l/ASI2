@@ -54,6 +54,7 @@ export const Display =(props) =>{
         return response.json();
       })
       .then((data) => {
+        setErrorMsg("");
         dispatch(set_user(data));
       })
       .catch((error) => {

@@ -27,24 +27,71 @@ export const Achat =(props) =>{
         return(<div>Vous devez être connecté</div>);
     }
 
-    useEffect(() => {
-      dispatch(update_selected_card({}));
-      const fetchCardsForSale = async () => {
-        try {
-          const response = await fetch('http://localhost:5100/db/cards/for-sale');
+    const fetchUserCard = async (card_id) => {
+      try {
+          const response = await fetch(`http://localhost:5100/mono/card/${card_id}`);
           if (!response.ok) {
-            throw new Error('Failed to fetch cards for sale');
+              throw new Error('Failed to fetch user cards');
           }
   
           const data = await response.json();
-          setCardsForSale(data);
-        } catch (error) {
-          console.error('Error fetching cards for sale:', error.message);
-        }
-      };
+          console.log("fetched " + JSON.stringify(data));
+          return data;
+      } catch (error) {
+          console.error('Error fetching user cards:', error.message);
+          return null;
+      }
+  };
   
-      fetchCardsForSale();
-    }, []);
+  const fetchData = async () => {
+      dispatch(update_selected_card({}));
+
+      try {
+        const response = await fetch(`http://localhost:5100/mono/cards_to_sell`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch cards');
+        }
+
+        const data = await response.json();
+        setCardsForSale(data);
+        return data;
+    } catch (error) {
+        console.error('Error fetching cards:', error.message);
+        return null;
+    }
+  };
+
+  useEffect(() => {  
+      fetchData();
+  }, []);
+
+  const handleBuyButtonClick = async () => {
+    try {
+        console.log("user: " + user.id + " card:" + card.id)
+        const response = await fetch('http://localhost:5100/mono/store/buy', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user_id: user.id,
+                card_id: card.id,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to buy the card');
+        }
+
+        const result = await response.json();
+        console.log('Card bought successfully:', result);
+
+        fetchData();
+    } catch (error) {
+        console.error('Error buying the card:', error.message);
+        // Handle error scenarios
+    }
+  };    
 
     return (
     <Container>
@@ -62,7 +109,7 @@ export const Achat =(props) =>{
                         <div class="card-body">
                             <Details/>
                         </div>
-                        <button>Buy</button>
+                        <button onClick={handleBuyButtonClick}>Buy</button>
                     </div>
                 </div>
             </div>

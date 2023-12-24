@@ -50,7 +50,7 @@ export const Card = (props) => {
         return(
             <div className='d-flex'>
                 <CardInListe card = {props.card} />
-                <input type="checkbox" className='deck-checkbox' onClick={event => handleOnCheck(event)}/>
+                <input type="checkbox" className='deck-checkbox' onClick={() => props.handleOnCheck(props.card)}/>
             </div>
         )
     }

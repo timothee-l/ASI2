@@ -6,7 +6,7 @@ import '../../sources/style.css';
 export const Liste = (props) => {
     let display = props.cards.map(
         (card) => (
-            <li key={card.name} class="list-group-item">
+            <li key={card.id} class="list-group-item">
                 <Card card={card} inline />
             </li>
         )

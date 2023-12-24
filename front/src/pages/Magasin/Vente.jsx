@@ -15,9 +15,6 @@ export const Vente =(props) =>{
 
     const [userCards, setUserCards] = useState([]);
 
-
-    let userId = 1; //TODO (placeholder) Get from auth
-
     let user = useSelector(state => state.userReducer.user);
     let card = useSelector(state => state.cardReducer.current_card);
     
@@ -28,31 +25,70 @@ export const Vente =(props) =>{
         return(<div>Vous devez être connecté</div>);
     }
 
-    useEffect(() => {
-        dispatch(update_selected_card({}));
-
-        const fetchUserCards = async () => {
-          try {
-            const response = await fetch(`http://localhost:5100/db/user/${userId}/cards`); // --> replace by user.id
+    const fetchUserCard = async (card_id) => {
+        try {
+            const response = await fetch(`http://localhost:5100/mono/card/${card_id}`);
             if (!response.ok) {
-              throw new Error('Failed to fetch user cards');
+                throw new Error('Failed to fetch user cards');
             }
     
             const data = await response.json();
-            setUserCards(data);
-          } catch (error) {
+            console.log("fetched " + JSON.stringify(data));
+            return data;
+        } catch (error) {
             console.error('Error fetching user cards:', error.message);
-          }
-        };
-        fetchUserCards();
-    }, [userId]);
+            return null;
+        }
+    };
     
-    const UnlistButton = () => {
-        return <button>Unlist</button>;
-      };
-      
-    const ListButton = () => {
-        return <button>List</button>;
+    const fetchData = async () => {
+        dispatch(update_selected_card({}));
+        setUserCards([]);
+
+        const cardPromises = user.cardList.map(async (id) => {
+            console.log("fetching " + id);
+            return fetchUserCard(id);
+        });
+
+        const cardsData = await Promise.all(cardPromises);
+
+        // Filter out null values (failed fetches) before updating the state
+        const filteredCardsData = cardsData.filter((data) => data !== null);
+        setUserCards([...userCards, ...filteredCardsData]);
+    };
+
+    useEffect(() => {
+
+    
+        fetchData();
+    }, [user]);
+
+    const handleSellButtonClick = async () => {
+        try {
+            console.log("user: " + user.id + " card:" + card.id)
+            const response = await fetch('http://localhost:5100/mono/store/sell', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_id: user.id,
+                    card_id: card.id,
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to sell the card');
+            }
+    
+            const result = await response.json();
+            console.log('Card sold successfully:', result);
+    
+            fetchData();
+        } catch (error) {
+            console.error('Error selling the card:', error.message);
+            // Handle error scenarios
+        }
     };
 
     return (
@@ -72,7 +108,7 @@ export const Vente =(props) =>{
                             <Details/>
                         </div>
                     </div>
-                    {card?.for_sale ? <UnlistButton /> : <ListButton />}
+                    <button onClick={handleSellButtonClick}>Sell</button>;
                 </div>
             </div>
         </div>

@@ -10,18 +10,34 @@ Gazaille Hadrien, Le Corre Sarah, Levilly Timothée, Maillot Tancrède
 - Npm, Node
 
 ## Setup
-- Lancer le reverse proxy: 
-  `cp ./nginx.conf /var/tmp
-docker run -d --rm --name my-custom-asi-nginx-container --network host -v /var/tmp/nginx.conf:/etc/nginx/nginx.conf:ro nginx`
-- Lancer le message broker
-  `docker run -d -it -p 61616:61616 -p 61613:61613 -p 8161:8161 -e ACTIVEMQ_DISALLOW_WEBCONSOLE=false -e ACTIVEMQ_USERNAME=myuser -e ACTIVEMQ_PASSWORD=mypwd -e ACTIVEMQ_WEBADMIN_USERNAME=myuserweb -e ACTIVEMQ_WEBADMIN_PASSWORD=mypwd symptoma/activemq:latest
-`
-- Se rendre sur `localhost:5173` sur son navigateur
-- Identifiants: `jdoe:abcd jane1:1234`
+- Lancer le script setup:   
+  `./setup_linux.sh`  
+- Lancer le front:  
+  `cd front`  
+  `npm install`  
+  `npm run dev -- --host`  
+- Lancer les services chat, jeu, matchmaking, notification: 
+  `cd (service)`  
+  `npm install`  
+  `node app.js`
+- Se rendre sur `localhost:5100` sur son navigateur
+
+
+Pour arrêter les conteneurs docker (services, rp, message broker):  
+  `docker-compose -f docker-compose.linux.yml down`
 
 ## Atelier 2
 
-TODO
+Features:
+- Connexion, Inscription  
+- Achat, Vente  
+- Chat
+- Matchmaking
+- Jeu (implémentation complète, reste des bugs à corriger)
+
+Autres:
+- Intégration avec docker compose
+- Dockerfiles pour les microservices (problème de réseau sur certains donc exclu du compose)
 
 ## Atelier 1
 

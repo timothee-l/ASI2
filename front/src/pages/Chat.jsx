@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
-import {current_user2} from '../components/user/containers/User.jsx'
+import { useSelector } from 'react-redux';
+
 
  export const Chat = (props) => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [socket, setSocket] = useState({});
+  let current_user = useSelector(state => state.userReducer.user);
+  let user_name = (current_user && current_user.login) ? current_user.login : "guest";
 
   
 
@@ -16,7 +19,8 @@ import {current_user2} from '../components/user/containers/User.jsx'
   },[]); 
 
   const handleMessage=(msg)=> {
-    const item = <li key={msg}>{current_user2+': '+msg}</li>;
+    console.log(current_user);
+    const item = <li key={msg}>{msg}</li>;
     setMessages(mess =>[...mess, item]);
     window.scrollTo(0, document.body.scrollHeight);
   }; 
@@ -26,7 +30,7 @@ import {current_user2} from '../components/user/containers/User.jsx'
     e.preventDefault();
     
     if (inputValue) {
-      socket.emit('chat message', inputValue);
+      socket.emit('chat message', user_name+': '+inputValue);
       setInputValue('');
     }
   };
@@ -38,7 +42,7 @@ import {current_user2} from '../components/user/containers/User.jsx'
       </ul>
       <form id="form" onSubmit={handleSubmit}>
         <input id="input" value={inputValue} onChange={(e) => setInputValue(e.target.value)} autocomplete="off" />
-        <button>Send2</button>
+        <button>Send</button>
       </form>
     </div>
   );

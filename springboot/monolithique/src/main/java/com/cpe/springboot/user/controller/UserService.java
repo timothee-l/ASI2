@@ -22,8 +22,11 @@ public class UserService {
 
 	@PostConstruct
 	public void init(){
-		UserModel user1 = new UserModel(0, "jdoe", "abc", 0, "doe", "john", "jdoe@example.com", null);
+		UserModel user1 = new UserModel(0, "jdoe", "abc", 100000, "doe", "john", "jdoe@example.com", null);
+		UserModel user2 = new UserModel(1, "janed", "abcd", 100000, "doe", "jane", "janedoe@example.com", null);
+
 		userRepository.save(user1);
+		userRepository.save(user2);
 	}
 
 	public UserService(UserRepository userRepository, CardModelService cardModelService) {

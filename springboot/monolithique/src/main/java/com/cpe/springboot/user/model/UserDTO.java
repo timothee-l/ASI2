@@ -18,6 +18,7 @@ public class UserDTO {
 	public UserDTO() {
 	}
 
+
 	public UserDTO(UserModel user) {
 		this.id = user.getId();
 		this.login = user.getLogin();

@@ -6,7 +6,7 @@ import '../../sources/style.css';
 export const DeckListe = (props) => {
     let display = props.cards.map(
         (card) => (
-            <li key={card.name} className="deck-card">
+            <li key={card.id} className="deck-card">
                 <Card card={card} handleOnCheck={props.handleOnCheck} inliste/>
             </li>
         )

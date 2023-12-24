@@ -6,7 +6,7 @@ import '../../sources/style.css';
 export const Liste = (props) => {
     let display = props.cards.map(
         (card) => (
-            <li key={card.name} className="list-group-game">
+            <li key={card.id} className="list-group-game" onClick={()=>{handleSelect(card)}}>
                 <Card card={card} ingame />
             </li>
         )

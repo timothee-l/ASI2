@@ -21,14 +21,14 @@ export const CardInGame = (props) => {
             }}
         onClick={() => handleActivate(props.card.id)}>
             <div className='card-ingame'>
-                <img style={{ height: 150, width: 150, objectFit: 'contain' }} src={props.card.src} alt="Card Image" />
+                <img style={{ height: 150, width: 150, objectFit: 'contain' }} src={props.card.imgUrl} alt="Card Image" />
                 <div className='InfoBox'>
                     <div>
                     <div className='CardName'>{props.card.name}</div>
                         <div className="HP">HP: {props.card.hp}</div>
                         <div className="Energy">Energy: {props.card.energy}</div>
                         <div className='Attack'>Attack: {props.card.attack}</div>
-                        <div className='Defense'>Defense: {props.card.defense}</div>
+                        <div className='Defense'>Defense: {props.card.defence}</div>
                     </div>
                 </div>   
             </div> 

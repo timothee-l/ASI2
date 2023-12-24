@@ -22,24 +22,6 @@ import { Chat } from './pages/Chat';
 
 //Create function component
 export const App =(props) =>{
-  let current_user = useSelector(state => state.userReducer.user);
-
-  useEffect(() => {
-    const socket = io({path: "/socket-service/", transports: ["websocket"]});
-
-    // Register the client with the server
-    socket.emit('register-client', current_user.id);
-
-    // Listen for the 'post-data' event
-    socket.on('post-data', (data) => {
-      console.log(`Received data from server for client ${current_user.id}:`, data);
-    });
-
-    // Clean up the WebSocket connection when the component unmounts
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
    
   return (
     <>
