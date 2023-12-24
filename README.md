@@ -4,6 +4,8 @@ Gazaille Hadrien, Le Corre Sarah, Levilly Timothée, Maillot Tancrède
 
 **Lien github : https://github.com/timothee-l/ASI2.git**
 
+**Démo vidéo : https://www.youtube.com/watch?v=unqxbvFNals**
+
 ## Pré-requis
 - Maven
 - Docker
@@ -19,7 +21,7 @@ Gazaille Hadrien, Le Corre Sarah, Levilly Timothée, Maillot Tancrède
 - Lancer les services chat, jeu, matchmaking, notification: 
   `cd (service)`  
   `npm install`  
-  `node app.js`
+  `node app.js` (`chat.js` pour l'app chat)
 - Se rendre sur `localhost:5100` sur son navigateur
 
 
